@@ -1,0 +1,13 @@
+{
+    "name": "glovell/php",
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    },
+    "authors": [
+        {
+            "name": "Grant Lovell",
+            "email": "grant.lovell@gmail.com"
+        }
+    ],
+    "require": {}
+}

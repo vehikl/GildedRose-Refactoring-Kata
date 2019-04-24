@@ -3,8 +3,7 @@
 	xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/3.7/phpunit.xsd"
 	backupGlobals="false" 
 	bootstrap="test/bootstrap.php"
-	colors="false" 
-	strict="true" 
+	colors="false"
 	verbose="true">
 
 	<testsuites>
@@ -12,4 +11,10 @@
 			<directory suffix="_test.php">test</directory>
 		</testsuite>
 	</testsuites>
+
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<file>src/gilded_rose.php</file>
+		</whitelist>
+	</filter>
 </phpunit>
