@@ -1,3 +1,5 @@
+const { can, incrementQuality, decrementSellIn } = require('./abilities.js');
+
 class BackstagePasses {
     setNextLink(updater) {
       this.nextLink = updater;
@@ -36,5 +38,7 @@ class BackstagePasses {
       return item.name != 'Backstage passes to a TAFKAL80ETC concert';
     }
   }
+
+  can(BackstagePasses.prototype, { incrementQuality, decrementSellIn })
 
   module.exports = BackstagePasses;

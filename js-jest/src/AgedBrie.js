@@ -1,3 +1,5 @@
+const { can, incrementQuality, decrementSellIn } = require('./abilities.js');
+
 class AgedBrie {
     setNextLink(updater) {
       this.nextLink = updater;
@@ -23,5 +25,7 @@ class AgedBrie {
       return item.name != 'Aged Brie'
     }
   }
+
+  can(AgedBrie.prototype, { incrementQuality, decrementSellIn });
 
   module.exports = AgedBrie;

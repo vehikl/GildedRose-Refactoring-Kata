@@ -1,3 +1,5 @@
+const { can, decrementQuality, decrementSellIn } = require('./abilities.js');
+
 class StoreItem {
     setNextLink(updater) {
         this.nextLink = updater;
@@ -15,5 +17,7 @@ class StoreItem {
         }
     }
 }
+
+can(StoreItem.prototype, { decrementQuality, decrementSellIn })
 
 module.exports = StoreItem;
