@@ -146,10 +146,7 @@ class Shop {
     ]);
   }
   updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
-      this.chain.tick(item);
-    }
+    this.items.forEach(item => this.chain.tick(item));
 
     return this.items;
   }
