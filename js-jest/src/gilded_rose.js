@@ -17,6 +17,22 @@ class UpdateChain {
   }
 }
 
+const decrementSellIn = item => item.sellIn--;
+const incrementQuality = (item) => {
+  if (item.quality < 50) {
+    item.quality++;
+  }
+}
+const decrementQuality = (item) => {
+  if (item.quality > 0) {
+    item.quality--;
+  }
+}
+
+function can(instance, operations) {
+  return Object.assign(instance, operations);
+}
+
 class BackstagePasses {
   setNextLink(updater) {
     this.nextLink = updater;
@@ -30,25 +46,25 @@ class BackstagePasses {
       return this.nextLink.tick(item);
     }
 
-    if (item.quality < 50) {
-      item.quality = item.quality + 1;
-      if (item.sellIn < 11) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
-      }
-      if (item.sellIn < 6) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
-      }
+    this.incrementQuality(item);
+
+    if (item.sellIn < 11) {
+      this.incrementQuality(item);
     }
 
-    item.sellIn = item.sellIn - 1;
+    if (item.sellIn < 6) {
+      this.incrementQuality(item);
+    }
+
+    this.decrementSellIn(item);
 
     if (item.sellIn < 0) {
-      item.quality = item.quality - item.quality;
+      this.setQualityToZero(item);
     }
+  }
+
+  setQualityToZero(item) {
+    item.quality = 0;
   }
 
   isNotBackstagePasses(item) {
@@ -64,16 +80,12 @@ class StoreItem {
   }
 
   tick(item) {
-    if (item.quality > 0) {
-      item.quality = item.quality - 1;
-    }
+    this.decrementQuality(item);
 
-    item.sellIn = item.sellIn - 1;
+    this.decrementSellIn(item);
 
     if (item.sellIn < 0) {
-      if (item.quality > 0) {
-        item.quality = item.quality - 1;
-      }
+      this.decrementQuality(item);
     }
   }
 }
@@ -90,16 +102,12 @@ class AgedBrie {
       return this.nextLink.tick(item)
     }
 
-    if (item.quality < 50) {
-      item.quality = item.quality + 1;
-    }
+    this.incrementQuality(item);
 
-    item.sellIn = item.sellIn - 1;
+    this.decrementSellIn(item);
 
     if (item.sellIn < 0) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1;
-      }
+      this.incrementQuality(item);
     }
   }
 
@@ -130,7 +138,12 @@ class Shop {
   constructor(items = []) {
     this.items = items;
 
-    this.chain = new UpdateChain([new Sulfuras, new BackstagePasses, new AgedBrie, new StoreItem]);
+    this.chain = new UpdateChain([
+      new Sulfuras,
+      can(new BackstagePasses, { decrementSellIn, incrementQuality }),
+      can(new AgedBrie, { decrementSellIn, incrementQuality }),
+      can(new StoreItem, { decrementSellIn, decrementQuality })
+    ]);
   }
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
