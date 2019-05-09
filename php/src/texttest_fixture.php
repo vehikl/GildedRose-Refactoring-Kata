@@ -20,8 +20,10 @@ $items = array(
 $app = new GildedRose($items);
 
 $days = 2;
+if (count($argv) > 1) {
+    $days = (int) $argv[1];
+}
 
-echo("<pre>");
 for ($i = 0; $i < $days; $i++) {
     echo("-------- day $i --------\n");
     echo("name, sellIn, quality\n");
@@ -31,4 +33,3 @@ for ($i = 0; $i < $days; $i++) {
     echo PHP_EOL;
     $app->update_quality();
 }
-echo("</pre>");
