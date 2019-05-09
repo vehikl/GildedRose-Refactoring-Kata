@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteRule ^.*$ /php/public/$1 [NC,L,QSA]
+</IfModule>
