@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/gilded_rose.php';
+require_once 'gilded_rose.php';
 
 echo "OMGHAI!\n";
 
