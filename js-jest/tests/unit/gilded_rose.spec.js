@@ -1,6 +1,5 @@
-
-const _ = require('lodash');
-const { Shop, Item } = require('../src/gilded_rose.js');
+import _ from 'lodash';
+import { Shop, Item } from '../../src/gilded_rose';
 
 describe('Gilded Rose', () => {
   const names = [
