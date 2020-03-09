@@ -1,9 +1,11 @@
 {
   "name": "gilded-rose-kata",
   "version": "1.0.0",
-  "description": "Gilded Rose kata in Javascript with Jest",
+  "description": "Gilded Rose kata in JavaScript with Jest",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-register": "^6.26.0",
-    "jest": "^24.7.1"
+    "jest": "^24.9.0"
   },
   "babel": {
     "presets": [
